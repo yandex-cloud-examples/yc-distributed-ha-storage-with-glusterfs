@@ -84,7 +84,7 @@ resource "yandex_compute_instance" "client_node_c" {
   count                     = (var.is_ha) ? var.client_node_per_zone : 0
   allow_recreate            = true
   allow_stopping_for_update = true
-  zone                      = yandex_vpc_subnet.net-c.zone
+  zone                      = yandex_vpc_subnet.net-d.zone
   platform_id               = "standard-v3"
   name                      = format("client%02d", var.client_node_per_zone * 2 + count.index + 1)
   hostname                  = format("client%02d", var.client_node_per_zone * 2 + count.index + 1)
@@ -96,7 +96,7 @@ resource "yandex_compute_instance" "client_node_c" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.net-c.id
+    subnet_id = yandex_vpc_subnet.net-d.id
     nat       = false
   }
 
