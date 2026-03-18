@@ -96,7 +96,7 @@ resource "yandex_compute_instance" "storage_node_c" {
   count                     = (var.is_ha) ? var.storage_node_per_zone : 0
   allow_recreate            = true
   allow_stopping_for_update = true
-  zone                      = yandex_vpc_subnet.net-c.zone
+  zone                      = yandex_vpc_subnet.net-d.zone
   platform_id               = "standard-v3"
   name                      = format("gluster%02d", count.index + 1 + var.storage_node_per_zone * 2)
   hostname                  = format("gluster%02d", count.index + 1 + var.storage_node_per_zone * 2)
@@ -108,7 +108,7 @@ resource "yandex_compute_instance" "storage_node_c" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.net-c.id
+    subnet_id = yandex_vpc_subnet.net-d.id
   }
 
   boot_disk {
